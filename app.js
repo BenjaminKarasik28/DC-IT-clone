@@ -23,7 +23,7 @@ signUpButton.addEventListener('click', function (event) {
   function signUpUser(mail,pwd,uname){
 
     (async () => {
-      const rawResponse = await fetch('http://localhost:8080/Fake_Reddit_Spring__1__war/user/signup', {
+      const rawResponse = await fetch('http://localhost:8080/Fake_Reddit_Spring_war/user/signup', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -38,7 +38,7 @@ signUpButton.addEventListener('click', function (event) {
   };
 
   (function listAllPosts(){
-    fetch(`http://localhost:8080/Fake_Reddit_Spring__1__war/post/list`)
+    fetch(`http://localhost:8080/Fake_Reddit_Spring_war/post/list`)
     .then((response) => {
         return response.json();
       })
@@ -138,7 +138,7 @@ loginButton.addEventListener('click', function (event) {
 });
 
 function login(mail, pwd){
-  fetch("http://localhost:8080/Fake_Reddit_Spring__1__war/user/login", {
+  fetch("http://localhost:8080/Fake_Reddit_Spring_war/user/login", {
     method: 'POST',
     headers:{
       'Accept': 'application/json',
@@ -172,7 +172,7 @@ function login(mail, pwd){
   function getCommentsByPostId(postId){
     let token = sessionStorage.getItem("token");
     let bearer = 'Bearer ' + token;
-    fetch(`http://localhost:8080/Fake_Reddit_Spring__1__war/post/${postId}/comment`,{
+    fetch(`http://localhost:8080/Fake_Reddit_Spring_war/post/${postId}/comment`,{
       headers:{
         'Authorization' : bearer,
         'Accept': 'application/json',
@@ -415,7 +415,7 @@ let token = sessionStorage.getItem("token")
 function createPost(bearer_token, title, description){
   
   let bearer = 'Bearer ' + bearer_token;
-  fetch("http://localhost:8080/Fake_Reddit_Spring__1__war/post", {
+  fetch("http://localhost:8080/Fake_Reddit_Spring_war/post", {
     method: 'POST',
 
     headers:{
@@ -482,7 +482,7 @@ function createComment(text){
   let postId = sessionStorage.getItem("PostId")
   let bearer_token = sessionStorage.getItem("token")
   let bearer = 'Bearer ' + bearer_token;
-  fetch(`http://localhost:8080/Fake_Reddit_Spring__1__war/comment/${postId}`, {
+  fetch(`http://localhost:8080/Fake_Reddit_Spring_war/comment/${postId}`, {
     method: 'POST',
 
     headers:{
@@ -511,7 +511,7 @@ function delComment(commentId){
   console.log("comment Id: " + id);
   let bearer_token = sessionStorage.getItem("token")
   let bearer = 'Bearer ' + bearer_token;
-  fetch(`http://localhost:8080/Fake_Reddit_Spring__1__war/comment/${commentId}`, {
+  fetch(`http://localhost:8080/Fake_Reddit_Spring_war/comment/${commentId}`, {
     method: 'DELETE',
 
     headers:{
@@ -550,9 +550,11 @@ function createProfile(addMail, mobile, address){
   (async () => {
     const rawResponse = await 
  console.log(addMail, mobile, address);
-  let bearer_token = sessionStorage.getItem("token")
+
+  let username = sessionStorage.getItem("userName");
+  let bearer_token = sessionStorage.getItem("token");
   let bearer = 'Bearer ' + bearer_token;
-  fetch(`http://thesi.generalassemb.ly:8080/profile`, {
+  fetch(`http://localhost:8080/Fake_Reddit_Spring_war/profile/${username}`, {
     method: 'POST',
 
     headers:{
@@ -569,7 +571,7 @@ function createProfile(addMail, mobile, address){
           if(response.status === 200)
             alert("Your profile was created");
 
-          return response.json();
+          // return response.json();
 
     }).then((response) => {
       console.log(response);
